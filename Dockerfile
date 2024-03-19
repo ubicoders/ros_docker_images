@@ -90,6 +90,9 @@ COPY ./requirements.txt /home/ubuntu/requirements.txt
 RUN pip install -r /home/ubuntu/requirements.txt
 RUN pip3 install -r /home/ubuntu/requirements.txt
 RUN rm -r /home/ubuntu/requirements.txt
+RUN pip uninstall em
+RUN pip install empy==3.3.4
+RUN apt-get install python3-tk -y
 
 # setup ROS environment
 ENV LANG C.UTF-8
@@ -97,7 +100,7 @@ ENV LC_ALL C.UTF-8
 RUN echo "source /opt/ros/foxy/setup.bash" >> /root/.bashrc
 RUN echo "alias python=python3" >> /root/.bashrc
 
-RUN apt-get install python3-tk -y
+
 
 # default workspace
 RUN mkdir -p /home/ubuntu/robot_ws/src
