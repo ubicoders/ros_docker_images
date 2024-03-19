@@ -52,6 +52,7 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
   pkg-config \
   python3-dev \
   python3-pip \
+  python3-tk \
   rsync \
   software-properties-common \
   shellcheck \
@@ -87,13 +88,11 @@ RUN apt install --no-install-recommends -y \
   libcunit1-dev
 
 # install required python packages
+RUN pip uninstall em
 COPY ./requirements.txt /home/ubuntu/requirements.txt
 RUN pip install -r /home/ubuntu/requirements.txt
 RUN pip3 install -r /home/ubuntu/requirements.txt
 RUN rm -r /home/ubuntu/requirements.txt
-RUN pip uninstall em
-RUN pip install empy==3.3.4
-RUN apt-get install python3-tk -y
 
 # setup ROS environment
 ENV LANG C.UTF-8
