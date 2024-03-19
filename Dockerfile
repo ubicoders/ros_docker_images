@@ -6,4 +6,6 @@ COPY install_uxrce.bash /home/ubuntu/install_uxrce.bash
 RUN bash /home/ubuntu/install_uxrce.bash
 RUN rm /home/ubuntu/install_uxrce.bash
 RUN rm -rf /home/ubuntu/robot_ws/Micro-XRCE-DDS-Agent
+RUN pip uninstall empy -y
+RUN pip install empy==3.3.4
 WORKDIR /home/ubuntu
