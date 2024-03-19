@@ -39,6 +39,7 @@ RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
   libtinyxml2-dev \
   libtool \ 
   lsb-release \
+  net-tools \
   make \
   nano \
   ninja-build \
@@ -100,7 +101,8 @@ ENV LC_ALL C.UTF-8
 RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
 RUN echo "alias python=python3" >> /root/.bashrc
 
-
+RUN apt update
+RUN apt install ros-humble-gazebo-ros-pkgs -y
 
 # default workspace
 RUN mkdir -p /home/ubuntu/robot_ws/src
