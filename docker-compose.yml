@@ -1,10 +1,10 @@
 version: "3.8"
 
 services:
-  u22_ros2_humble:
-    container_name: u22_ros2_humble_cnt
+  u22_ros2_uxrcedds:
+    container_name: u22_ros2_uxrcedds_cnt
     build: .
-    image: ubicoders/u22_ros2_humble:latest
+    image: ubicoders/u22_ros2_uxrcedds:latest
     network_mode: host
     privileged: true
     stdin_open: true # docker run -i
