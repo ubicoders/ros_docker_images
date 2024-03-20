@@ -1,11 +1,9 @@
 # ubuntu 22.04
-FROM ubicoders/u22_ros2_humble:latest
+FROM ubicoders/ros:uxrcedds
 
-COPY download_bridge_px4_ros.bash /home/ubuntu/
-COPY install_uxrce.bash /home/ubuntu/install_uxrce.bash
-RUN bash /home/ubuntu/install_uxrce.bash
-RUN rm /home/ubuntu/install_uxrce.bash
-RUN rm -rf /home/ubuntu/robot_ws/Micro-XRCE-DDS-Agent
-RUN pip uninstall empy -y
-RUN pip install empy==3.3.4
+COPY download_px4_autopilot.bash /home/ubuntu/download_px4_autopilot.bash
+RUN bash /home/ubuntu/download_px4_autopilot.bash
+RUN bash /home/ubuntu/PX4-Autopilot/Tools/setup/ubuntu.sh
+RUN mkdir -p /home/ubuntu/mavlink_test/my_dialects
+RUN pip install setuptools==58.2.0
 WORKDIR /home/ubuntu
