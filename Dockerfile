@@ -102,7 +102,7 @@ RUN echo "alias python=python3" >> /root/.bashrc
 
 RUN apt update
 RUN apt install ros-humble-gazebo-ros-pkgs -y
-
+RUN pip install setuptools==58.2.0
 # default workspace
 RUN mkdir -p /home/ubuntu/robot_ws/src
 WORKDIR /home/ubuntu/robot_ws
