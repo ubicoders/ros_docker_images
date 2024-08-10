@@ -2,7 +2,7 @@ version: "3.8"
 
 services: 
   zed_ros2_srv:
-      container_name: zed_ros2_cnt      
+      container_name: zed_ros2_cnt
       build: .
       image: ubicoders/ros2:u22_cuda12.1_zed
       network_mode: host
