@@ -4,7 +4,7 @@ services:
   zed_ros2_srv:
       container_name: zed_ros2_cnt
       build: .
-      image: ubicoders/ros2:u22_cuda12.1_zed
+      image: ubicoders/ros2:u22_cuda12.1_zed_uxrcedds
       network_mode: host
       privileged: true
       stdin_open: true # docker run -i
