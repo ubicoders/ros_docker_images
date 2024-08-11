@@ -28,6 +28,9 @@ RUN apt-get update && apt-get install -y \
     && sh -c 'echo "deb http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list' \
     && apt-get update
 
+ENV DEBIAN_FRONTEND=noninteractive
+RUN ln -fs /usr/share/zoneinfo/UTC /etc/localtime && echo "UTC" > /etc/timezone
+
 # Install ROS 2 Humble desktop full
 RUN apt-get install -y ros-humble-desktop-full \
     && apt-get clean \
@@ -43,9 +46,8 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-
 ############################################################################
-# System packages 
+# System packages
 RUN apt-get update && apt-get -y --quiet --no-install-recommends install \
   apt-utils \
   autoconf \
@@ -150,6 +152,15 @@ RUN mkdir -p /home/ubuntu/robot_ws/src
 WORKDIR /home/ubuntu/
 
 # installing opencv with cuda support
+RUN apt-get install build-essential libcanberra-gtk-module libcanberra-gtk3-module cmake libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev -y
 RUN pip uninstall opencv-python opencv-contrib-python -y
 COPY ./install_ocv_cuda.bash /home/install_ocv_cuda.bash
-RUN bash /home/ubuntu/install_ocv_cuda.bash
+RUN bash /home/install_ocv_cuda.bash
+
+
+# installing zed sdk
+RUN apt install zstd -y
+COPY ./ZED_SDK_Ubuntu22_cuda12.1_v4.1.3.zstd.run /home/ZED_SDK_Ubuntu22_cuda12.1_v4.1.3.zstd.run
+RUN /home/ZED_SDK_Ubuntu22_cuda12.1_v4.1.3.zstd.run -- silent
+COPY ./ocv_pip.bash /home/ocv_pip.bash
+RUN bash /home/ocv_pip.bash
