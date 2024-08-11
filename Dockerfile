@@ -1,4 +1,4 @@
-FROM stereolabs/zed:4.1-devel-cuda12.1-ubuntu22.04
+FROM nvidia/cuda:12.1.0-cudnn8-devel-ubuntu22.04
 
 ############################################################################
 # ZED opencv Prep
@@ -8,11 +8,9 @@ RUN apt install libjpeg-turbo8 libturbojpeg libusb-1.0-0 libusb-1.0-0-dev libope
 
 ## RUN pip3 uninstall numpy -y
 RUN rm -rf /usr/local/lib/python3.10/dist-packages/numpy*
-RUN pip3 install numpy==1.26.4 requests opencv-python==4.6.0.66 opencv-contrib-python
-RUN pip3 install PyOpenGL==3.1.1a1
-
+RUN pip3 install numpy==1.26.4 requests cython==3.0.11 PyOpenGL==3.1.1a1
 ############################################################################
-
+# Installing ROS2 Humble
 # Set environment variables for ROS 2 Humble
 ENV ROS_DISTRO humble
 
@@ -31,7 +29,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get update
 
 # Install ROS 2 Humble desktop full
-RUN apt-get install -y ros-humble-desktop \
+RUN apt-get install -y ros-humble-desktop-full \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -130,8 +128,7 @@ RUN python3 -m pip install -U \
   pytest
 
 # install Cyclone DDS dependencies
-RUN apt install --no-install-recommends -y \
-  libcunit1-dev
+RUN apt install --no-install-recommends -y libcunit1-dev
 
 # install required python packages
 RUN pip uninstall em
@@ -151,3 +148,8 @@ RUN pip install setuptools==58.2.0
 # default workspace
 RUN mkdir -p /home/ubuntu/robot_ws/src
 WORKDIR /home/ubuntu/
+
+# installing opencv with cuda support
+RUN pip uninstall opencv-python opencv-contrib-python -y
+COPY ./install_ocv_cuda.bash /home/install_ocv_cuda.bash
+RUN bash /home/ubuntu/install_ocv_cuda.bash
