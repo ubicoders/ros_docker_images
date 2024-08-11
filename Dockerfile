@@ -164,3 +164,14 @@ COPY ./ZED_SDK_Ubuntu22_cuda12.1_v4.1.3.zstd.run /home/ZED_SDK_Ubuntu22_cuda12.1
 RUN /home/ZED_SDK_Ubuntu22_cuda12.1_v4.1.3.zstd.run -- silent
 COPY ./ocv_pip.bash /home/ocv_pip.bash
 RUN bash /home/ocv_pip.bash
+
+# ros hubmle additional packages
+RUN apt install ros-humble-*msgs -y
+
+# delete the installers
+#ZED_SDK_Ubuntu22_cuda12.1_v4.1.3.zstd.run  install_ocv_cuda.bash  ocv_pip.bash  opencv-4.10.0  opencv_contrib-4.10.0
+RUN rm /home/ZED_SDK_Ubuntu22_cuda12.1_v4.1.3.zstd.run
+RUN rm /home/install_ocv_cuda.bash
+RUN rm /home/ocv_pip.bash
+RUN rm -r /home/opencv-4.10.0
+RUN rm -r /home/opencv_contrib-4.10.0
