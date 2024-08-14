@@ -170,6 +170,7 @@ RUN apt install ros-humble-*msgs -y
 RUN pip install -U rosdep
 RUN rosdep init
 RUN rosdep update
+RUN pip install setuptools==58.2.0
 
 # delete the installers
 #ZED_SDK_Ubuntu22_cuda12.1_v4.1.3.zstd.run  install_ocv_cuda.bash  ocv_pip.bash  opencv-4.10.0  opencv_contrib-4.10.0
