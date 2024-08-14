@@ -8,4 +8,5 @@ RUN bash /home/ubuntu/install_uxrce.bash
 RUN rm /home/ubuntu/install_uxrce.bash
 RUN pip uninstall empy -y
 RUN pip install empy==3.3.4
+RUN pip install setuptools==58.2.0
 WORKDIR /home/ubuntu
