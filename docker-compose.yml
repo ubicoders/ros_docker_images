@@ -15,7 +15,7 @@ services:
       volumes:
         - "/tmp/.X11-unix/:/tmp/.X11-unix/:rw"
         - "$HOME/.Xauthority:/root/.Xauthority:rw"
-        - "/dev/:/dev/"  
+        - "/dev/:/dev/"
       runtime: nvidia
       deploy:
         resources:
