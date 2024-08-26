@@ -84,8 +84,7 @@ RUN python3 -m pip install -U \
   pytest
 
 # install Cyclone DDS dependencies
-RUN apt install --no-install-recommends -y \
-  libcunit1-dev
+RUN apt install --no-install-recommends -y libcunit1-dev
 
 # install required python packages
 RUN pip uninstall em
